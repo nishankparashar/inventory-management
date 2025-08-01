@@ -1,0 +1,25 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="512" cy="512" r="512" fill="#2563EB"/>
+  
+  <!-- Box/Inventory icon -->
+  <rect x="312" y="312" width="400" height="300" rx="20" fill="white" stroke="white" stroke-width="8"/>
+  
+  <!-- Box lid -->
+  <rect x="292" y="292" width="440" height="60" rx="20" fill="white" stroke="white" stroke-width="8"/>
+  
+  <!-- Inventory lines -->
+  <rect x="352" y="372" width="320" height="8" rx="4" fill="#2563EB"/>
+  <rect x="352" y="412" width="280" height="8" rx="4" fill="#2563EB"/>
+  <rect x="352" y="452" width="240" height="8" rx="4" fill="#2563EB"/>
+  <rect x="352" y="492" width="200" height="8" rx="4" fill="#2563EB"/>
+  <rect x="352" y="532" width="160" height="8" rx="4" fill="#2563EB"/>
+  
+  <!-- Plus symbol for add/management -->
+  <circle cx="800" cy="224" r="80" fill="#10B981"/>
+  <path d="M760 224h80M800 184v80" stroke="white" stroke-width="16" stroke-linecap="round"/>
+  
+  <!-- Check mark for alerts -->
+  <circle cx="224" cy="224" r="80" fill="#F59E0B"/>
+  <path d="M184 224l20 20 40-40" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> 

@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "Inventory Manager",
+    "slug": "inventory-manager",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "inventory-manager",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/images/favicon.png",
+      "title": "Inventory Manager"
+    },
+    "plugins": ["expo-router", "expo-font", "expo-web-browser"],
+  }
+}
