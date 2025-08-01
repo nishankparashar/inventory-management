@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Package, AlertTriangle, Settings } from 'lucide-react-native';
+import { Package, AlertTriangle } from 'lucide-react-native';
 import { Colors } from '@/constants/styles';
 
 export default function TabLayout() {
@@ -35,15 +35,6 @@ export default function TabLayout() {
           title: 'Alerts',
           tabBarIcon: ({ size, color }) => (
             <AlertTriangle size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ size, color }) => (
-            <Settings size={size} color={color} />
           ),
         }}
       />

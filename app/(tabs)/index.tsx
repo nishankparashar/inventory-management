@@ -45,17 +45,7 @@ export default function InventoryScreen() {
       if (errorMessage.includes('OAuth2')) {
         Alert.alert(
           'Setup Required',
-          'Buy/sell functionality requires OAuth2 authentication. Please follow the setup guide to enable write access.',
-          [
-            { text: 'OK' },
-            { 
-              text: 'View Setup Guide', 
-              onPress: () => {
-                // You could navigate to a setup guide screen here
-                console.log('Navigate to setup guide');
-              }
-            }
-          ]
+          'Buy/sell functionality requires OAuth2 authentication. Please configure your OAuth2 credentials in the .env file.'
         );
       } else {
         Alert.alert('Transaction Failed', errorMessage);

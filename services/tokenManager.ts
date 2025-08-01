@@ -62,7 +62,11 @@ export class TokenManager {
 
   async getAccessToken(): Promise<string | null> {
     if (!this.tokenData) {
-      return null;
+      // Try to initialize from environment variables if no stored token
+      await this.initializeFromEnv();
+      if (!this.tokenData) {
+        return null;
+      }
     }
 
     // Check if token is expired (with 5 minute buffer)
@@ -76,6 +80,24 @@ export class TokenManager {
     }
 
     return this.tokenData.access_token;
+  }
+
+  private async initializeFromEnv(): Promise<void> {
+    const accessToken = process.env.EXPO_PUBLIC_GOOGLE_ACCESS_TOKEN;
+    const refreshToken = process.env.EXPO_PUBLIC_GOOGLE_REFRESH_TOKEN;
+    
+    if (accessToken && refreshToken) {
+      const tokenData: TokenData = {
+        access_token: accessToken,
+        refresh_token: refreshToken,
+        expires_in: 3600, // Default 1 hour
+        token_type: 'Bearer',
+        scope: 'https://www.googleapis.com/auth/spreadsheets',
+        created_at: Date.now() - (3600 * 1000), // Mark as expired to force refresh
+      };
+      
+      await this.setTokenData(tokenData);
+    }
   }
 
   private async refreshAccessToken(): Promise<string> {

@@ -64,9 +64,10 @@ export class GoogleSheetsService {
 
   async updateInventoryItem(itemId: string, newStockVol: number): Promise<boolean> {
     try {
-      // Check if we have write access (OAuth2 token)
-      if (!tokenManager.isAuthenticated()) {
-        throw new Error('Write access requires OAuth2 authentication. Please set up OAuth2 credentials for buy/sell functionality.');
+      // Try to get access token (will auto-refresh if needed)
+      const accessToken = await tokenManager.getAccessToken();
+      if (!accessToken) {
+        throw new Error('OAuth2 authentication required. Please configure EXPO_PUBLIC_GOOGLE_ACCESS_TOKEN and EXPO_PUBLIC_GOOGLE_REFRESH_TOKEN in your .env file.');
       }
 
       // First, get the current row data to preserve unit_measurement and min_value
