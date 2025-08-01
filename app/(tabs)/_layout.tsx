@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Package, AlertTriangle } from 'lucide-react-native';
+import { Package, TriangleAlert as AlertTriangle } from 'lucide-react-native';
 import { Colors } from '@/constants/styles';
 
 export default function TabLayout() {
