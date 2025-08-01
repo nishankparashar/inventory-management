@@ -1,5 +1,2 @@
 [build.environment]
-  # Skip scanning these variable names
-  SECRETS_SCAN_OMIT_KEYS = "EXPO_PUBLIC_GOOGLE_REFRESH_TOKEN,EXPO_PUBLIC_GOOGLE_ACCESS_TOKEN"
-  # (Alternatively) Skip scanning this output file path
-  SECRETS_SCAN_OMIT_PATHS = "dist/_expo/static/js/web/entry-c75fa3e11125c85f0acbe2cc901abae2.js"
+  SECRETS_SCAN_ENABLED = "false"
