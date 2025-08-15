@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { InventoryItem } from '@/types/inventory';
-import { sheetsService } from '@/services/googleSheets';
-import { tokenManager } from '@/services/tokenManager';
+import { apiClient } from '@/services/apiClient';
 
 export function useInventory() {
   const [items, setItems] = useState<InventoryItem[]>([]);
@@ -9,24 +8,10 @@ export function useInventory() {
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
-  // Initialize token manager on app startup
-  useEffect(() => {
-    const initializeTokenManager = async () => {
-      try {
-        await tokenManager.initialize();
-        console.log('Token manager initialized');
-      } catch (error) {
-        console.error('Failed to initialize token manager:', error);
-      }
-    };
-
-    initializeTokenManager();
-  }, []);
-
   const fetchItems = useCallback(async () => {
     try {
       setError(null);
-      const data = await sheetsService.getInventoryData();
+      const data = await apiClient.getInventoryData();
       setItems(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch inventory data');
@@ -56,12 +41,12 @@ export function useInventory() {
       }
 
       console.log('Updating Google Sheets...');
-      await sheetsService.updateInventoryItem(itemId, newStockVol);
+      await apiClient.updateInventoryItem(itemId, type, quantity, newStockVol);
       console.log('Google Sheets updated successfully');
       
       // Fetch fresh data from Google Sheets to ensure consistency
       // This ensures we get the exact data that was saved, including preserved fields
-      const freshData = await sheetsService.getInventoryData();
+      const freshData = await apiClient.getInventoryData();
       const updatedItem = freshData.find(i => i.id === itemId);
       
       if (updatedItem) {
@@ -96,9 +81,9 @@ export function useInventory() {
     setError(null);
     try {
       // Force a fresh fetch from Google Sheets
-      const freshData = await sheetsService.getInventoryData();
+      const freshData = await apiClient.getInventoryData();
       setItems(freshData);
-      console.log('Data refreshed from Google Sheets');
+      console.log('Data refreshed from server');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to refresh inventory data');
       console.error('Refresh failed:', err);
